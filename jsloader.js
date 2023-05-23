@@ -1,6 +1,7 @@
 import EventEmitter3 from 'eventemitter3';
 
-export default class JsLoader extends EventEmitter3 {
+// js 加载器
+class JsLoader extends EventEmitter3 {
 
   head = null;
   script = null;
@@ -19,7 +20,8 @@ export default class JsLoader extends EventEmitter3 {
   loadJs(url) {
     // 过滤已加载的js
     const scripts = [ ...document.querySelectorAll('script') ];
-    if (scripts.some(s => s.src == url)) {
+    const isLoaded = scripts.some(s => s.src == url);
+    if (isLoaded) {
       console.log('已经加载过');
       return true;
     }
@@ -46,3 +48,5 @@ export default class JsLoader extends EventEmitter3 {
     this.head && this.head.removeChild(this.script);
   }
 }
+
+export default JsLoader;
